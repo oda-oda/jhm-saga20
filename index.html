@@ -39,13 +39,26 @@ header{position:sticky;top:0;z-index:50;background:rgba(247,248,245,.92);backdro
 .nav ul a.cta:hover{background:#983524}
 .menu-btn{display:none;background:none;border:1px solid var(--mist);border-radius:8px;padding:8px 12px;font-size:14px;font-family:var(--sans);cursor:pointer;color:var(--ai-deep)}
 @media(max-width:840px){
-  .nav{flex-wrap:wrap;height:auto;padding:10px 0 0}
-  .brand{padding-bottom:8px}
-  .menu-btn{display:none}
-  .nav ul{width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;flex-wrap:nowrap;gap:2px;padding:0 0 10px;scrollbar-width:none}
-  .nav ul::-webkit-scrollbar{display:none}
-  .nav ul a{white-space:nowrap;padding:7px 11px;font-size:13.5px}
+  header{position:sticky}
+  .nav{height:auto;padding:10px 0;align-items:center;position:relative}
+  .menu-btn{display:flex;align-items:center;gap:8px;font-weight:700;line-height:1;-webkit-tap-highlight-color:transparent}
+  .menu-btn .bars{display:inline-block;width:18px;height:14px;position:relative}
+  .menu-btn .bars i{position:absolute;left:0;width:100%;height:2px;background:var(--ai-deep);border-radius:2px;transition:.25s}
+  .menu-btn .bars i:nth-child(1){top:0}
+  .menu-btn .bars i:nth-child(2){top:6px}
+  .menu-btn .bars i:nth-child(3){top:12px}
+  .menu-btn[aria-expanded="true"] .bars i:nth-child(1){top:6px;transform:rotate(45deg)}
+  .menu-btn[aria-expanded="true"] .bars i:nth-child(2){opacity:0}
+  .menu-btn[aria-expanded="true"] .bars i:nth-child(3){top:6px;transform:rotate(-45deg)}
+  .nav ul{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;gap:0;background:var(--porcelain);border-top:1px solid var(--mist);border-bottom:1px solid var(--mist);box-shadow:0 10px 24px rgba(18,49,79,.14);padding:6px 0;z-index:60}
+  .nav ul.open{display:flex}
+  .nav ul li{border-bottom:1px solid var(--mist)}
+  .nav ul li:last-child{border-bottom:0}
+  .nav ul a{padding:15px 24px;font-size:15px;border-radius:0;-webkit-tap-highlight-color:rgba(28,76,124,.12)}
+  .nav ul a.cta{margin:10px 24px 6px;border-radius:8px;text-align:center}
 }
+/* 固定ヘッダーの下に見出しが隠れないように */
+section[id],div[id]{scroll-margin-top:76px}
 
 /* ---------- hero ---------- */
 .hero{position:relative;overflow:hidden;background:linear-gradient(160deg,var(--ai-deep) 0%,var(--ai) 62%,#2A5E90 100%);color:#fff}
@@ -146,6 +159,7 @@ footer h4{font-family:var(--serif);color:#fff;font-size:16px;margin-bottom:10px}
 <header>
   <div class="wrap nav">
     <a class="brand" href="#top">日本医療マネジメント学会<small>第20回 佐賀支部学術集会</small></a>
+    <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="gnav" aria-label="メニューを開く"><span class="bars"><i></i><i></i><i></i></span>メニュー</button>
     <ul id="gnav">
       <li><a href="#greeting">ご挨拶</a></li>
       <li><a href="#overview">開催概要</a></li>
@@ -399,6 +413,54 @@ footer h4{font-family:var(--serif);color:#fff;font-size:16px;margin-bottom:10px}
   </div>
 </footer>
 
+
+<script>
+(function(){
+  var btn  = document.getElementById('menuBtn');
+  var nav  = document.getElementById('gnav');
+  var head = document.querySelector('header');
+  if(!btn || !nav) return;
+
+  function setOpen(open){
+    nav.classList.toggle('open', open);
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    btn.setAttribute('aria-label', open ? 'メニューを閉じる' : 'メニューを開く');
+  }
+
+  btn.addEventListener('click', function(e){
+    e.preventDefault();
+    setOpen(!nav.classList.contains('open'));
+  });
+
+  // メニュー内のリンクをタップしたら閉じて、ヘッダー分ずらしてスクロール
+  nav.addEventListener('click', function(e){
+    var a = e.target.closest ? e.target.closest('a') : null;
+    if(!a) return;
+    var href = a.getAttribute('href') || '';
+    setOpen(false);
+    if(href.charAt(0) !== '#' || href === '#') return;
+    var target = document.getElementById(href.slice(1));
+    if(!target) return;
+    e.preventDefault();
+    var offset = head ? head.offsetHeight : 0;
+    var top = target.getBoundingClientRect().top + window.pageYOffset - offset + 1;
+    window.scrollTo({top: top, behavior: 'smooth'});
+    if(history.replaceState) history.replaceState(null, '', href);
+  });
+
+  // メニューの外側をタップしたら閉じる
+  document.addEventListener('click', function(e){
+    if(!nav.classList.contains('open')) return;
+    if(nav.contains(e.target) || btn.contains(e.target)) return;
+    setOpen(false);
+  });
+
+  // 画面を広げたら通常メニューに戻す
+  window.addEventListener('resize', function(){
+    if(window.innerWidth > 840) setOpen(false);
+  });
+})();
+</script>
 
 </body>
 </html>
