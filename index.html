@@ -112,6 +112,14 @@ section:nth-of-type(even){background:#fff}
 @media(max-width:600px){.ovw th{width:110px;padding:12px 14px}.ovw td{padding:12px 14px}}
 
 /* cards */
+.field-box{background:#fff;border:1px solid var(--mist);border-radius:14px;padding:32px;margin-top:28px}
+.field-box h3{font-family:var(--serif);color:var(--ai-deep);font-size:19px;margin-bottom:20px}
+.field-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(310px,1fr));gap:18px 28px}
+.field{display:flex;gap:14px;align-items:flex-start}
+.field-no{flex:none;width:28px;height:28px;border-radius:50%;background:var(--ai);color:#fff;font-size:13px;font-weight:700;display:grid;place-items:center;margin-top:3px}
+.field h4{font-family:var(--serif);font-size:16px;color:var(--ai-deep);line-height:1.5;margin-bottom:4px}
+.field p{font-size:13.5px;color:#5a6b7a;line-height:1.75}
+@media(max-width:600px){.field-box{padding:24px 20px}}
 .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
 .card{background:#fff;border:1px solid var(--mist);border-radius:12px;padding:26px}
 section:nth-of-type(even) .card{background:var(--porcelain)}
@@ -344,11 +352,56 @@ footer h4{font-family:var(--serif);color:#fff;font-size:16px;margin-bottom:10px}
       </div>
       <div class="card">
         <h3>募集分野</h3>
-        <p>①看護業務　②医療安全　③チーム医療　④クリティカルパス　⑤患者支援　⑥地域連携　⑦病院運営　⑧ICT　⑨感染対策（COVID-19含む）　⑩その他医療マネジメント</p>
+        <p>下記の10分野からお選びのうえ、演題をご登録ください。分野の判断に迷われる場合は、最も近いものをお選びいただければ結構です。</p>
       </div>
       <div class="card">
         <h3>抄録作成要領</h3>
         <p>発表形式は口頭発表です。演題名は40文字以内、抄録本文は800字程度（1000字以内）で、【はじめに】【方法】【結果】【結論】を目安に項立てしてご執筆ください（項立ては変更可）。筆頭演者は本学会員であることが必要です。</p>
+      </div>
+    </div>
+    <div class="field-box">
+      <h3>募集分野一覧</h3>
+      <div class="field-list">
+        <div class="field">
+          <div class="field-no">1</div>
+          <div><h4>地域共創・まちづくり</h4><p>医療機関発の地域活性化、商業・交通・住まいとの連携、地域イベント、まちの保健室、住民組織との協働など</p></div>
+        </div>
+        <div class="field">
+          <div class="field-no">2</div>
+          <div><h4>地域包括ケア・在宅支援・病院間連携</h4><p>従来の「地域連携」「患者支援」の発展形。かかりつけ医・介護・福祉施設・行政との切れ目のないネットワーク構築</p></div>
+        </div>
+        <div class="field">
+          <div class="field-no">3</div>
+          <div><h4>予防医療・健康増進</h4><p>健診・人間ドックの活用、フレイル・認知症予防、住民向け健康教育・リテラシー向上、企業連携（職域連携）</p></div>
+        </div>
+        <div class="field">
+          <div class="field-no">4</div>
+          <div><h4>防災・BCP・地域インフラ機能</h4><p>災害拠点・避難所としての機能、地域全体での感染制御（感染対策の地域支援ネットワーク）、非常時協定</p></div>
+        </div>
+        <div class="field">
+          <div class="field-no">5</div>
+          <div><h4>多職種協働・タスクシフト</h4><p>院内多職種連携にとどまらず、地域多職種（ケアマネ・薬剤師・訪問看護等）との協働や業務の効率化</p></div>
+        </div>
+        <div class="field">
+          <div class="field-no">6</div>
+          <div><h4>医療DX・ICT</h4><p>地域医療情報ネットワーク、遠隔診療、生成AIや電子カルテデータを活用した地域課題の可視化・業務改善</p></div>
+        </div>
+        <div class="field">
+          <div class="field-no">7</div>
+          <div><h4>病院経営・組織マネジメント・人材育成</h4><p>経営戦略、人材定着・採用、働き方改革、地域医療を担う次世代医療人の育成</p></div>
+        </div>
+        <div class="field">
+          <div class="field-no">8</div>
+          <div><h4>看護・ケアの質向上・クリティカルパス</h4><p>看護実践、退院支援・生活を見据えた看護、地域連携パスの運用と標準化</p></div>
+        </div>
+        <div class="field">
+          <div class="field-no">9</div>
+          <div><h4>医療安全・質マネジメント</h4><p>インシデント分析、リスクマネジメント、医療事故防止体制の構築</p></div>
+        </div>
+        <div class="field">
+          <div class="field-no">10</div>
+          <div><h4>その他（医療マネジメント全般）</h4><p>上記に分類されない創意工夫や先駆的取り組み</p></div>
+        </div>
       </div>
     </div>
     <div style="background:#fff;border:1px solid var(--mist);border-radius:14px;padding:32px;margin-top:28px">
